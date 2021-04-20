@@ -69,7 +69,7 @@ namespace ProsperityNetwork
 
         public double getProsperity()
         {
-            return (100 * (this.totalPayoff/this.maxPayoff));
+            return (((double)totalPayoff/maxPayoff) * 100);
         }
 
         private int calcNodePayoff(Node node)
@@ -78,7 +78,10 @@ namespace ProsperityNetwork
             int payoff = 0;
             foreach(int index in nodeConnections)
             {
-                payoff += nodeList[index].Benefit;
+                if (nodeList[index] is Cooperator)
+                {
+                    payoff += nodeList[index].Benefit;
+                }
             }
             payoff -= (node.Cost * nodeConnections.Count);
             nodeList[node.Index].Payoff = payoff;
@@ -112,9 +115,9 @@ namespace ProsperityNetwork
                 totalCooperators -= 1;
             }
             List<int> neighborIndexes = removedNode.NeighborIndexes;
-            foreach(int index in neighborIndexes)
+            for(int i = 0; i < neighborIndexes.Count; i++)
             {
-                nodeList[index].removeConnection(removedIndex);
+                nodeList[neighborIndexes[i]].removeConnection(removedIndex);
             }
             nodeList[removedIndex] = null;
             Console.WriteLine("Node removed");
@@ -125,10 +128,29 @@ namespace ProsperityNetwork
         {
             Random rng = new Random();
             Node newNode;
+            if(index == roleModelIndex)
+            {
+                roleModelIndex = -1;
+                foreach (Node node in nodeList)
+                {
+                    if (node != null)
+                    {
+                        if(roleModelIndex == -1)
+                        {
+                            roleModelIndex = node.Index;
+                        }
+                        else if (nodeList[roleModelIndex].getEffectivePayoff() < node.getEffectivePayoff())
+                        {
+                            roleModelIndex = node.Index;
+                        }
+                    }
+                }
+            }
+            List<int> roleModelNeighbors = nodeList[roleModelIndex].NeighborIndexes;
             List<int> newNodeCons = new List<int>();
             int roleCopyNum = rng.Next(0, 100);
             int roleConNum = rng.Next(0, 100);
-            int roleNeighborConNum = rng.Next(0, 100);
+            int roleNeighborConNum;
             if(nodeList[roleModelIndex] is Cooperator)
             {
                 if(roleCopyNum < (roleMethodCopyProb * 100))
@@ -157,9 +179,13 @@ namespace ProsperityNetwork
             {
                 newNodeCons.Add(roleModelIndex);
             }
-            if(roleNeighborConNum < (roleNeighborConProb * 100))
+            for (int i = 0; i < roleModelNeighbors.Count; i++)
             {
-                newNodeCons.AddRange(nodeList[roleModelIndex].NeighborIndexes);
+                roleNeighborConNum = rng.Next(0, 100);
+                if (roleNeighborConNum < (roleNeighborConProb * 100))
+                {
+                    newNodeCons.Add(roleModelNeighbors[i]);
+                }
             }
             newNode.addConnections(newNodeCons);
             nodeList[index] = newNode;

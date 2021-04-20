@@ -10,56 +10,94 @@
         <Rectangle HorizontalAlignment="Left" Height="226" Margin="10,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="238"/>
         <Label Content="Probabilities" HorizontalAlignment="Left" Height="26" Margin="90,15,0,0" VerticalAlignment="Top" Width="78"/>
         <Label Content="Starting probability of a &#10;new node copying the &#10;role model's behaviour:" HorizontalAlignment="Left" Height="58" Margin="19,41,0,0" VerticalAlignment="Top" Width="136"/>
-        <GroupBox>
+        <GroupBox Margin="164,47,0,0" HorizontalAlignment="Left" Width="80" Height="51" VerticalAlignment="Top" BorderThickness="0">
             <Grid>
-                <TextBox Name="roleModelCopyProb" HorizontalAlignment="Left" Height="40" Margin="174,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="54" TextAlignment="Center"/>
-                <Button Content="/\" HorizontalAlignment="Left" Margin="228,50,0,0" VerticalAlignment="Top" Tag="roleModelCopyProb" Click="UpArrow"/>
-                <Button Content="\/" HorizontalAlignment="Left" Margin="228,70,0,0" VerticalAlignment="Top" Tag="roleModelCopyProb" Click="DownArrow"/>
+                <TextBox Text="50" Name="roleModelCopyProb" HorizontalAlignment="Left" Height="40" Margin="0,3,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="54" TextAlignment="Center" Tag="Percent"/>
+                <Button Content="/\" HorizontalAlignment="Left" Margin="54,3,0,0" VerticalAlignment="Top" Tag="roleModelCopyProb" Click="UpArrow"/>
+                <Button Content="\/" HorizontalAlignment="Left" Margin="54,23,0,0" VerticalAlignment="Top" Tag="roleModelCopyProb" Click="DownArrow"/>
             </Grid>
         </GroupBox>
         <Label Content="Starting probability of a &#10;new node connecting &#10;to the role model:" HorizontalAlignment="Left" Margin="19,99,0,0" VerticalAlignment="Top" Width="136" Height="58"/>
-        <GroupBox>
+        <GroupBox Margin="164,105,0,0" HorizontalAlignment="Left" Width="80" Height="50" VerticalAlignment="Top" BorderThickness="0">
             <Grid>
-                <TextBox Name="roleModelConProb" HorizontalAlignment="Left" Height="40" Margin="174,108,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="54" TextAlignment="Center"/>
-                <Button Content="/\" HorizontalAlignment="Left" Margin="228,108,0,0" VerticalAlignment="Top" Tag="roleModelConProb" Click="UpArrow"/>
-                <Button Content="\/" HorizontalAlignment="Left" Margin="228,128,0,0" VerticalAlignment="Top" Tag="roleModelConProb" Click="DownArrow"/>
+                <TextBox Text="50" Name="roleModelConProb" HorizontalAlignment="Left" Height="40" Margin="0,3,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="54" TextAlignment="Center" Tag="Percent"/>
+                <Button Content="/\" HorizontalAlignment="Left" Margin="54,3,0,0" VerticalAlignment="Top" Tag="roleModelConProb" Click="UpArrow"/>
+                <Button Content="\/" HorizontalAlignment="Left" Margin="54,23,0,0" VerticalAlignment="Top" Tag="roleModelConProb" Click="DownArrow"/>
             </Grid>
         </GroupBox>
         <Label Content="Starting probability of a &#xA;new node connecting &#xA;to the role model:" HorizontalAlignment="Left" Margin="19,157,0,0" VerticalAlignment="Top" Width="136" Height="58"/>
-        <GroupBox>
+        <GroupBox Margin="164,165,0,0" Height="50" VerticalAlignment="Top" HorizontalAlignment="Left" Width="80" BorderThickness="0">
             <Grid>
-                <TextBox Name="roleModelNeighborConProb" HorizontalAlignment="Left" Height="40" Margin="174,166,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="54" TextAlignment="Center"/>
-                <Button Content="/\" HorizontalAlignment="Left" Margin="228,166,0,0" VerticalAlignment="Top" Tag="roleModelNeighborConProb" Click="UpArrow"/>
-                <Button Content="\/" HorizontalAlignment="Left" Margin="228,186,0,0" VerticalAlignment="Top" Tag="roleModelNeighborConProb" Click="DownArrow"/>
+                <TextBox Text="50" Name="roleModelNeighborConProb" HorizontalAlignment="Left" Height="40" Margin="0,3,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="54" TextAlignment="Center" Tag="Percent"/>
+                <Button Content="/\" HorizontalAlignment="Left" Margin="54,3,0,0" VerticalAlignment="Top" Tag="roleModelNeighborConProb" Click="UpArrow"/>
+                <Button Content="\/" HorizontalAlignment="Left" Margin="54,23,0,0" VerticalAlignment="Top" Tag="roleModelNeighborConProb" Click="DownArrow"/>
             </Grid>
         </GroupBox>
-        <Rectangle HorizontalAlignment="Left" Height="226" Margin="274,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="378"/>
-        <Label Content="Network Population" HorizontalAlignment="Left" Height="26" Margin="404,15,0,0" VerticalAlignment="Top" Width="118"/>
-        <Label Content="No. Nodes:" HorizontalAlignment="Left" Height="29" Margin="278,51,0,0" VerticalAlignment="Top" Width="70"/>
-        <GroupBox>
+        <Rectangle HorizontalAlignment="Left" Height="226" Margin="255,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="378"/>
+        <Label Content="Network Population" HorizontalAlignment="Left" Height="26" Margin="387,15,0,0" VerticalAlignment="Top" Width="118"/>
+        <Label Content="Simulation Name:" HorizontalAlignment="Left" Height="29" Margin="324,58,0,0" VerticalAlignment="Top" Width="107"/>
+        <GroupBox Margin="436,48,0,0" HorizontalAlignment="Left" Width="119" Height="50" VerticalAlignment="Top" BorderThickness="0">
             <Grid>
-                <TextBox Name="noNodes" HorizontalAlignment="Left" Height="40" Margin="348,46,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="54" TextAlignment="Center"/>
-                <Button Content="/\" HorizontalAlignment="Left" Margin="402,46,0,0" VerticalAlignment="Top" Tag="noNodes" Click="UpArrow"/>
-                <Button Content="\/" HorizontalAlignment="Left" Margin="402,66,0,0" VerticalAlignment="Top" Tag="noNodes"  Click="DownArrow"/>
+                <TextBox x:Name="simName" HorizontalAlignment="Center" Height="40" Margin="0,3,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="88" TextAlignment="Center"/>
             </Grid>
         </GroupBox>
-        <Label Content="Percentage of &#xA;Co-operators:" HorizontalAlignment="Left" Height="44" Margin="456,44,0,0" VerticalAlignment="Top" Width="86"/>
-        <GroupBox>
+        <Label Content="No. Nodes:" HorizontalAlignment="Left" Height="29" Margin="278,122,0,0" VerticalAlignment="Top" Width="70"/>
+        <GroupBox Margin="351,111,0,0" HorizontalAlignment="Left" Width="80" Height="50" VerticalAlignment="Top" BorderThickness="0">
             <Grid>
-                <TextBox Name="percCooperators" HorizontalAlignment="Left" Height="40" Margin="542,46,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="54" TextAlignment="Center"/>
-                <Button Content="/\" HorizontalAlignment="Left" Margin="596,46,0,0" VerticalAlignment="Top" Tag="percCooperators" Click="UpArrow"/>
-                <Button Content="\/" HorizontalAlignment="Left" Margin="596,66,0,0" VerticalAlignment="Top" Tag="percCooperators" Click="DownArrow"/>
+                <TextBox Text="100" Name="noNodes" HorizontalAlignment="Left" Height="40" Margin="0,3,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="54" TextAlignment="Center" Tag="Int"/>
+                <Button Content="/\" HorizontalAlignment="Left" Margin="54,3,0,0" VerticalAlignment="Top" Tag="noNodes" Click="UpArrow"/>
+                <Button Content="\/" HorizontalAlignment="Left" Margin="54,23,0,0" VerticalAlignment="Top" Tag="noNodes"  Click="DownArrow"/>
             </Grid>
         </GroupBox>
-        <Label Content="Update data &#xA;frequency:" HorizontalAlignment="Left" Height="46" Margin="280,100,0,0" VerticalAlignment="Top" Width="76"/>
-        <GroupBox>
+        <Label Content="Percentage of &#xA;Co-operators:" HorizontalAlignment="Left" Height="44" Margin="452,114,0,0" VerticalAlignment="Top" Width="86"/>
+        <GroupBox Margin="540,111,0,0" HorizontalAlignment="Left" Width="80" Height="50" VerticalAlignment="Top" BorderThickness="0">
             <Grid>
-                <TextBox Name="updateFreq" HorizontalAlignment="Left" Height="40" Margin="355,103,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="54" TextAlignment="Center"/>
-                <Button Content="/\" HorizontalAlignment="Left" Margin="409,103,0,0" VerticalAlignment="Top" Tag="updateFreq" Click="UpArrow"/>
-                <Button Content="\/" HorizontalAlignment="Left" Margin="409,123,0,0" VerticalAlignment="Top" Tag="updateFreq" Click="DownArrow"/>
+                <TextBox Text="50" Name="percCooperators" HorizontalAlignment="Left" Height="40" Margin="0,3,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="54" TextAlignment="Center" Tag="Percent"/>
+                <Button Content="/\" HorizontalAlignment="Left" Margin="54,3,0,0" VerticalAlignment="Top" Tag="percCooperators" Click="UpArrow"/>
+                <Button Content="\/" HorizontalAlignment="Left" Margin="54,23,0,0" VerticalAlignment="Top" Tag="percCooperators" Click="DownArrow"/>
+            </Grid>
+        </GroupBox>
+        <Label Content="Update data &#xA;  frequency:" HorizontalAlignment="Left" Height="46" Margin="276,167,0,0" VerticalAlignment="Top" Width="76"/>
+        <GroupBox Margin="351,166,0,0" HorizontalAlignment="Left" Width="80" Height="50" VerticalAlignment="Top" BorderThickness="0">
+            <Grid>
+                <TextBox Text="5" Name="updateDelay" HorizontalAlignment="Left" Height="40" TextWrapping="Wrap" VerticalAlignment="Top" Width="54" TextAlignment="Center" Margin="0,3,0,0" Tag="Int"/>
+                <Button Content="/\" HorizontalAlignment="Left" Margin="54,3,0,0" VerticalAlignment="Top" Tag="updateDelay" Click="UpArrow"/>
+                <Button Content="\/" HorizontalAlignment="Left" Margin="54,23,0,0" VerticalAlignment="Top" Tag="updateDelay" Click="DownArrow"/>
+            </Grid>
+        </GroupBox>
+        <Label Content="Graph data &#xA;   Quality:" HorizontalAlignment="Left" Height="44" Margin="458,170,0,0" VerticalAlignment="Top" Width="72"/>
+        <ComboBox Name="qualityBox" HorizontalAlignment="Left" Margin="535,181,0,0" VerticalAlignment="Top" Width="90">
+            <ComboBoxItem>Low</ComboBoxItem>
+            <ComboBoxItem>Medium</ComboBoxItem>
+            <ComboBoxItem IsSelected="True">High</ComboBoxItem>
+            <ComboBoxItem>Highest</ComboBoxItem>
+        </ComboBox>
+        <Rectangle HorizontalAlignment="Left" Height="226" Margin="640,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="150"/>
+        <Label Content="Node modifiers" HorizontalAlignment="Left" Height="26" Margin="680,15,0,0" VerticalAlignment="Top" Width="94"/>
+        <Label Content="Benefit:" HorizontalAlignment="Left" Height="28" Margin="652,55,0,0" VerticalAlignment="Top" Width="53"/>
+        <GroupBox Margin="710,44,0,0" HorizontalAlignment="Left" Width="80" Height="50" VerticalAlignment="Top" BorderThickness="0">
+            <Grid>
+                <TextBox Text="10" x:Name="benefit" HorizontalAlignment="Left" Height="40" TextWrapping="Wrap" VerticalAlignment="Top" Width="54" TextAlignment="Center" Margin="0,3,0,0" Tag="Int"/>
+                <Button Content="/\" HorizontalAlignment="Left" Margin="54,3,0,0" VerticalAlignment="Top" Tag="benefit" Click="UpArrow"/>
+                <Button Content="\/" HorizontalAlignment="Left" Margin="54,23,0,0" VerticalAlignment="Top" Tag="benefit" Click="DownArrow"/>
+            </Grid>
+        </GroupBox>
+        <Label Content="Cost:" HorizontalAlignment="Left" Height="28" Margin="656,108,0,0" VerticalAlignment="Top" Width="38"/>
+        <GroupBox Margin="710,98,0,0" HorizontalAlignment="Left" Width="80" Height="50" VerticalAlignment="Top" BorderThickness="0">
+            <Grid>
+                <TextBox Text="1" x:Name="cost" HorizontalAlignment="Left" Height="40" TextWrapping="Wrap" VerticalAlignment="Top" Width="54" TextAlignment="Center" Margin="0,3,0,0" Tag="Int"/>
+                <Button Content="/\" HorizontalAlignment="Left" Margin="54,3,0,0" VerticalAlignment="Top" Tag="cost" Click="UpArrow"/>
+                <Button Content="\/" HorizontalAlignment="Left" Margin="54,23,0,0" VerticalAlignment="Top" Tag="cost" Click="DownArrow"/>
+            </Grid>
+        </GroupBox>
+        <Label Content="Selection &#xA;Intensity:" HorizontalAlignment="Left" Height="42" Margin="646,157,0,0" VerticalAlignment="Top" Width="59"/>
+        <GroupBox Margin="710,153,0,0" HorizontalAlignment="Left" Width="80" Height="50" VerticalAlignment="Top" BorderThickness="0">
+            <Grid>
+                <TextBox Text="2" x:Name="selectionIntensity" HorizontalAlignment="Left" Height="40" TextWrapping="Wrap" VerticalAlignment="Top" Width="54" TextAlignment="Center" Margin="0,3,0,0" Tag="Percent"/>
+                <Button Content="/\" HorizontalAlignment="Left" Margin="54,3,0,0" VerticalAlignment="Top" Tag="selectionIntensity" Click="UpArrow"/>
+                <Button Content="\/" HorizontalAlignment="Left" Margin="54,23,0,0" VerticalAlignment="Top" Tag="selectionIntensity" Click="DownArrow"/>
             </Grid>
         </GroupBox>
         <Button Content="Generate" HorizontalAlignment="Center" Height="33" Margin="0,332,0,0" VerticalAlignment="Top" Width="198" Click="GenerateSim"/>
-
     </Grid>
 </Window>
