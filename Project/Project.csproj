@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="TXT\" />
     <Folder Include="XML\" />
   </ItemGroup>
 

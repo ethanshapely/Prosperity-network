@@ -46,12 +46,13 @@ namespace Project
             get { return (int)GetValue(CoopProperty); }
         }
 
-        public SimWindow(string simName, int noNodes, int benefitChosen, int costChosen, double selectionIntensityChosen, double roleConProbChosen, double roleNeighborConProbChosen, double roleMethodCopyProbChosen, double percentCooperators, int delay, string graphQuality)
+        public SimWindow(string simName, int noNodes, int benefitChosen, int costChosen, double selectionIntensityChosen, double roleConProbChosen, double roleNeighborConProbChosen, double roleMethodCopyProbChosen, double percentCooperators, int delay, string graphQuality, bool isEvolving, double mutationExtreme)
         {
             InitializeComponent();
-            network = new ProsperityNetwork.ProsperitySimulation(noNodes, benefitChosen, costChosen, selectionIntensityChosen, roleConProbChosen, roleNeighborConProbChosen, roleMethodCopyProbChosen, percentCooperators, delay);
+            network = new ProsperityNetwork.ProsperitySimulation(noNodes, benefitChosen, costChosen, selectionIntensityChosen, roleConProbChosen, roleNeighborConProbChosen, roleMethodCopyProbChosen, percentCooperators, delay, isEvolving, mutationExtreme);
             network.AsyncLoopStart(simName);
             paused = false;
+            SetValue(QualityProperty, graphQuality);
             timer = new Timer(GetFromSim, null, (delay*1000), (delay * 1000));
             //getFromSim();
         }

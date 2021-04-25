@@ -69,7 +69,7 @@ namespace Project.GraphTools
             DataContext = this;
         }
 
-        public void addValues(int index, double[] values)
+        public void AddValues(int index, double[] values)
         {
             SeriesCollection[index].Values = values.AsGearedValues().WithQuality(quality);
         }

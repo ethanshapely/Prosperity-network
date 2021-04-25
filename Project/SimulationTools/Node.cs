@@ -45,13 +45,13 @@ namespace ProsperityNetwork
             neighborIndexes = new List<int>();
         }
 
-        public double getEffectivePayoff()
+        public double GetEffectivePayoff()
         {
             return Math.Pow((1 + selectionIntensity), payoff);
         }
 
 
-        public void addConnections(List<int> newConnections)
+        public void AddConnections(List<int> newConnections)
         {
             bool inNeighborIndexes;
             foreach(int item in newConnections)
@@ -71,7 +71,7 @@ namespace ProsperityNetwork
             }
         }
 
-        public void removeConnection(int index)
+        public void RemoveConnection(int index)
         {
             neighborIndexes.Remove(index);
         }

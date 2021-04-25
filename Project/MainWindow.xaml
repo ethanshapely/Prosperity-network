@@ -8,7 +8,7 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Rectangle HorizontalAlignment="Left" Height="226" Margin="10,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="238"/>
-        <Label Content="Probabilities" HorizontalAlignment="Left" Height="26" Margin="90,15,0,0" VerticalAlignment="Top" Width="78"/>
+        <Label Content="Probabilities (Percentage)" HorizontalAlignment="Left" Height="26" Margin="58,15,0,0" VerticalAlignment="Top" Width="146"/>
         <Label Content="Starting probability of a &#10;new node copying the &#10;role model's behaviour:" HorizontalAlignment="Left" Height="58" Margin="19,41,0,0" VerticalAlignment="Top" Width="136"/>
         <GroupBox Margin="164,47,0,0" HorizontalAlignment="Left" Width="80" Height="51" VerticalAlignment="Top" BorderThickness="0">
             <Grid>
@@ -98,6 +98,16 @@
                 <Button Content="\/" HorizontalAlignment="Left" Margin="54,23,0,0" VerticalAlignment="Top" Tag="selectionIntensity" Click="DownArrow"/>
             </Grid>
         </GroupBox>
-        <Button Content="Generate" HorizontalAlignment="Center" Height="33" Margin="0,332,0,0" VerticalAlignment="Top" Width="198" Click="GenerateSim"/>
+        <Rectangle HorizontalAlignment="Left" Height="147" Margin="10,241,0,0" Stroke="Black" VerticalAlignment="Top" Width="238"/>
+        <CheckBox x:Name="evolveCheck" Content="Create an Evolving Network?" HorizontalAlignment="Left" Margin="43,255,0,0" VerticalAlignment="Top"/>
+        <Label Content="Mutation Extreme &#xA;(less than 100)" HorizontalAlignment="Left" Height="56" Margin="19,296,0,0" VerticalAlignment="Top" Width="110"/>
+        <GroupBox Margin="149,299,0,0" HorizontalAlignment="Left" Width="80" Height="50" VerticalAlignment="Top" BorderThickness="0">
+            <Grid>
+                <TextBox Text="50" x:Name="mutationExtreme" HorizontalAlignment="Left" Height="40" TextWrapping="Wrap" VerticalAlignment="Top" Width="54" TextAlignment="Center" Margin="0,3,0,0" Tag="Percent"/>
+                <Button Content="/\" HorizontalAlignment="Left" Margin="54,3,0,0" VerticalAlignment="Top" Tag="mutationExtreme" Click="UpArrow"/>
+                <Button Content="\/" HorizontalAlignment="Left" Margin="54,23,0,0" VerticalAlignment="Top" Tag="mutationExtreme" Click="DownArrow"/>
+            </Grid>
+        </GroupBox>
+        <Button Content="Generate" HorizontalAlignment="Center" Height="33" Margin="0,355,0,0" VerticalAlignment="Top" Width="198" Click="GenerateSim"/>
     </Grid>
 </Window>

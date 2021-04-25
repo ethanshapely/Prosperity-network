@@ -104,7 +104,7 @@ namespace Project.GraphTools
             { 
                 SetValue(LineProp, value);
                 coopReadings.Add(value);
-                addValues(0, coopReadings.Select(x => (double)x).ToArray());
+                AddValues(0, coopReadings.Select(x => (double)x).ToArray());
             }
         }
 

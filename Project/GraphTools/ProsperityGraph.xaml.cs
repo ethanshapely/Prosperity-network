@@ -34,7 +34,7 @@ namespace Project.GraphTools
             {
                 SetValue(LineProp, value);
                 prosperityReadings.Add(value);
-                addValues(0, prosperityReadings.ToArray());
+                AddValues(0, prosperityReadings.ToArray());
             }
         }
 

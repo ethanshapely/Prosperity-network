@@ -93,13 +93,15 @@ namespace Project
                     int.Parse(noNodes.Text),
                     int.Parse(benefit.Text),
                     int.Parse(cost.Text),
-                    ((double)int.Parse(selectionIntensity.Text) / 1),
-                    ((double)int.Parse(roleModelConProb.Text) / 100),
-                    ((double)int.Parse(roleModelNeighborConProb.Text) / 100),
-                    ((double)int.Parse(roleModelCopyProb.Text) / 100),
-                    ((double)int.Parse(percCooperators.Text) / 100),
+                    (double)int.Parse(selectionIntensity.Text),
+                    (double)int.Parse(roleModelConProb.Text) / 100,
+                    (double)int.Parse(roleModelNeighborConProb.Text) / 100,
+                    (double)int.Parse(roleModelCopyProb.Text) / 100,
+                    (double)int.Parse(percCooperators.Text) / 100,
                     int.Parse(updateDelay.Text),
-                    qualityBox.SelectedValue.ToString()
+                    qualityBox.SelectedValue.ToString(),
+                    (bool)evolveCheck.IsChecked,
+                    (double)int.Parse(mutationExtreme.Text) / 100
                 );
                 sim.Show();
             }
