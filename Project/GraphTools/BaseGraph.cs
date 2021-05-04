@@ -13,6 +13,7 @@ using System.Windows.Shapes;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.ComponentModel;
 using LiveCharts;
 using LiveCharts.Events;
 using LiveCharts.Wpf;
@@ -20,11 +21,13 @@ using LiveCharts.Geared;
 
 namespace Project.GraphTools
 {
-    public partial class BaseGraph : UserControl
+    public partial class BaseGraph : UserControl, INotifyPropertyChanged
     {
-        //public static readonly DependencyProperty LineProp = DependencyProperty.Register("LineValue", typeof(int), typeof(BaseGraph), new FrameworkPropertyMetadata(null));
-        public static readonly DependencyProperty QualityProp = DependencyProperty.Register("GraphQuality", typeof(string), typeof(BaseGraph), new FrameworkPropertyMetadata(null));
-        Quality quality;
+        public static readonly DependencyProperty LineProp = DependencyProperty.Register("LineValues", typeof(GearedValues<double>), typeof(BaseGraph), new FrameworkPropertyMetadata(null));
+        public static readonly DependencyProperty QualityProp = DependencyProperty.Register("GraphQuality", typeof(Quality), typeof(BaseGraph), new FrameworkPropertyMetadata(null));
+        protected Quality quality;
+        GearedValues<double> values;
+        //GearedValues<double> values;
 
         /*public int LineValue
         {
@@ -32,52 +35,58 @@ namespace Project.GraphTools
             set { SetValue(LineProp, value); }
         }*/
 
-        public string GraphQuality
+        public GearedValues<double> LineValues
         {
-            get { return (string)GetValue(QualityProp); }
+            get { return (GearedValues<double>)GetValue(LineProp); }
+            set 
+            { 
+                SetValue(LineProp, value);
+                OnPropertyChanged();
+                values = (GearedValues<double>)GetValue(LineProp);
+            }
+        }
+
+        public Quality GraphQuality
+        {
+            get { return (Quality)GetValue(QualityProp); }
             set
             {
                 SetValue(QualityProp, value);
-                if (value == "Low")
-                {
-                    quality = Quality.Low;
-                }
-                else if (value == "Medium")
-                {
-                    quality = Quality.Medium;
-                }
-                else if (value == "Highest")
-                {
-                    quality = Quality.Highest;
-                }
-                else
-                {
-                    quality = Quality.High;
-                }
+                OnPropertyChanged();
+                quality = (Quality)GetValue(QualityProp);
             }
         }
 
         public BaseGraph()
         {
-            SeriesCollection = new SeriesCollection { };
+            //SeriesCollection = new SeriesCollection { };
             XFormatter = value => value.ToString("0");
             YFormatter = value => value.ToString("0.##");
+            values = new GearedValues<double>();
 
             //modifying any series values will also animate and update the chart
             //SeriesCollection[0].Values.Add(5d);
 
-            DataContext = this;
+            //DataContext = this;
+            //values = new GearedValues<double>().WithQuality(quality);
         }
 
-        public void AddValues(int index, double[] values)
+        /*public void AddValues(int index, double[] values)
         {
             SeriesCollection[index].Values = values.AsGearedValues().WithQuality(quality);
-        }
+        }*/
 
         //Add on property change: add NoCoops to ChartValues
 
-        public SeriesCollection SeriesCollection { get; set; }
+        //public SeriesCollection SeriesCollection { get; set; }
         public Func<double, string> XFormatter { get; set; }
         public Func<double, string> YFormatter { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChanged(PropertyChangedEventArgs e = null)
+        {
+            PropertyChanged?.Invoke(this, e);
+        }
     }
 }

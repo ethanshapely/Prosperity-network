@@ -13,51 +13,133 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
+using LiveCharts;
+using LiveCharts.Events;
+using LiveCharts.Wpf;
+using LiveCharts.Geared;
 
 namespace Project
 {
     /// <summary>
     /// Interaction logic for SimWindow.xaml
     /// </summary>
-    public partial class SimWindow : Window
+    public partial class SimWindow : Window, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
         ///private int networkCooperators;
         ///private double networkProsperity;
         ProsperityNetwork.ProsperitySimulation network;
 
-        public static readonly DependencyProperty QualityProperty = DependencyProperty.Register("GraphQuality", typeof(string), typeof(SimWindow), new FrameworkPropertyMetadata(null));
-        public static readonly DependencyProperty ProsperityProperty = DependencyProperty.Register("NetworkProsperity", typeof(double), typeof(SimWindow), new FrameworkPropertyMetadata(null));
-        public static readonly DependencyProperty CoopProperty = DependencyProperty.Register("NetworkNoCoops", typeof(int), typeof(SimWindow), new FrameworkPropertyMetadata(null));
-        private Boolean paused;
+        //public static readonly DependencyProperty QualityProperty = DependencyProperty.Register("GraphQuality", typeof(string), typeof(SimWindow), new FrameworkPropertyMetadata(null));
+        //public static readonly DependencyProperty ProsperityProperty = DependencyProperty.Register("NetworkProsperity", typeof(double), typeof(SimWindow), new FrameworkPropertyMetadata(null));
+        //public static readonly DependencyProperty CoopProperty = DependencyProperty.Register("NetworkNoCoops", typeof(int), typeof(SimWindow), new FrameworkPropertyMetadata(null));
+        /*public DependencyProperty CoopProperty = DependencyProperty.Register("CoopTotals", typeof(GearedValues<int>), typeof(SimWindow), new FrameworkPropertyMetadata(null));
+        public DependencyProperty AvrgCoopProperty = DependencyProperty.Register("AvrgCoops", typeof(GearedValues<double>), typeof(SimWindow), new FrameworkPropertyMetadata(null));
+        public DependencyProperty ProsperityProperty = DependencyProperty.Register("Prosperity", typeof(GearedValues<double>), typeof(SimWindow), new FrameworkPropertyMetadata(null));
+        public DependencyProperty RoleConProperty = DependencyProperty.Register("RoleConProbs", typeof(GearedValues<double>), typeof(SimWindow), new FrameworkPropertyMetadata(null));
+        public DependencyProperty RoleNeighborConProperty = DependencyProperty.Register("RoleNeighborConProbs", typeof(GearedValues<double>), typeof(SimWindow), new FrameworkPropertyMetadata(null));*/
+        private Quality quality;
+        private Boolean paused, evolving;
         private Timer timer;
+        public GearedValues<double> prosperityValues, avrgCoopsValues, avrgRoleConProbValues, avrgRoleNeighborConProbValues;
+        public GearedValues<int> totalCoopValues;
 
-        private string GraphQuality
+        /*private string GraphQuality
         {
             get { return (string)GetValue(QualityProperty); }
-        }
+        }*/
 
-        private double NetworkProsperity
+        /*private GearedValues<double> NetworkProsperity
         {
-            get { return (double)GetValue(ProsperityProperty); }
+            get { return (GearedValues<double>)GetValue(ProsperityProperty); }
         }
 
-        private int NetworkNoCoops
+        private GearedValues<int> NetworkCoops
         {
-            get { return (int)GetValue(CoopProperty); }
+            get { return (GearedValues<int>)GetValue(CoopProperty); }
         }
 
-        public SimWindow(string simName, int noNodes, int benefitChosen, int costChosen, double selectionIntensityChosen, double roleConProbChosen, double roleNeighborConProbChosen, double roleMethodCopyProbChosen, double percentCooperators, int delay, string graphQuality, bool isEvolving, double mutationExtreme)
+        private GearedValues<double> NetworkAvrgCoops
+        {
+            get { return (GearedValues<double>)GetValue(AvrgCoopProperty); }
+        }
+
+        private GearedValues<double> NetworkRoleConProbs
+        {
+            get { return (GearedValues<double>)GetValue(RoleConProperty); }
+        }
+
+        private GearedValues<double> NetworkRoleNeighborConProbs
+        {
+            get { return (GearedValues<double>)GetValue(RoleNeighborConProperty); }
+        }*/
+
+        public GearedValues<double> Prosperity
+        {
+            get { return prosperityValues; }
+        }
+
+        public GearedValues<int> Cooperators
+        {
+            get { return totalCoopValues; }
+        }
+
+        public GearedValues<double> AverageCooperators
+        {
+            get { return avrgCoopsValues; }
+        }
+
+        public GearedValues<double> AverageRoleConProb
+        {
+            get { return avrgRoleConProbValues; }
+        }
+
+        public GearedValues<double> AverageRoleNeighborConProb
+        {
+            get { return avrgRoleNeighborConProbValues; }
+        }
+
+        public Quality LineQuality
+        {
+            get { return quality; }
+        }
+
+        public SimWindow(string simName, int noNodes, int benefitChosen, int costChosen, double selectionIntensityChosen, double roleConProbChosen, double roleNeighborConProbChosen, double roleMethodCopyProbChosen, double percentCooperators, int delay, string graphQuality, bool isEvolving, double mutationExtremeRMC, double mutationExtremeRMNC)
         {
             InitializeComponent();
-            network = new ProsperityNetwork.ProsperitySimulation(noNodes, benefitChosen, costChosen, selectionIntensityChosen, roleConProbChosen, roleNeighborConProbChosen, roleMethodCopyProbChosen, percentCooperators, delay, isEvolving, mutationExtreme);
-            network.AsyncLoopStart(simName);
+            network = new ProsperityNetwork.ProsperitySimulation(noNodes, benefitChosen, costChosen, selectionIntensityChosen, roleConProbChosen, roleNeighborConProbChosen, roleMethodCopyProbChosen, percentCooperators, delay, isEvolving, mutationExtremeRMC, mutationExtremeRMNC);
+            evolving = isEvolving;
             paused = false;
-            SetValue(QualityProperty, graphQuality);
-            timer = new Timer(GetFromSim, null, (delay*1000), (delay * 1000));
+            if(graphQuality == "Low")
+            {
+                quality = Quality.Low;
+            }
+            else if(graphQuality == "Medium")
+            {
+                quality = Quality.Medium;
+            }
+            else if(graphQuality == "Highest")
+            {
+                quality = Quality.Highest;
+            }
+            else
+            {
+                quality = Quality.High;
+            }
+            prosperityValues = new GearedValues<double>().WithQuality(quality);
+            totalCoopValues = new GearedValues<int>().WithQuality(quality);
+            avrgCoopsValues = new GearedValues<double>().WithQuality(quality);
+            avrgRoleConProbValues = new GearedValues<double>().WithQuality(quality);
+            avrgRoleNeighborConProbValues = new GearedValues<double>().WithQuality(quality);
+            //SetValue(QualityProperty, graphQuality);
+            Task.Factory.StartNew(network.AsyncLoopStart(simName));
+            timer = new Timer(GetFromSim, null, delay + 100, delay);
+            Trace.WriteLine("--- Timer Start ---");
             //getFromSim();
         }
 
-        private void GetFromSim(Object stateInfo)
+        /*private void GetFromSim(Object stateInfo)
         {
             if (!paused)
             {
@@ -67,11 +149,36 @@ namespace Project
                     Trace.WriteLine("ProsperityProp set called");
                     SetValue(CoopProperty, network.TotalCooperators);
                     Trace.WriteLine("CoopProp set called");
+                    *Trace.WriteLine("Prosperity property: " + GetValue(ProsperityProperty));
+                    Trace.WriteLine("Coop property: " + GetValue(CoopProperty));
+                });
+            }
+        }*/
+
+        private void GetFromSim(Object stateInfo)
+        {
+            if (!paused)
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    prosperityValues.Add(network.Prosperity);
+                    //SetValue(ProsperityProperty, prosperityValues);
+                    totalCoopValues.Add(network.TotalCooperators);
+                    //SetValue(CoopProperty, totalCoopValues);
+                    avrgCoopsValues.Add(network.AverageCooperators);
+                    //SetValue(AvrgCoopProperty, prosperityValues);
+                    if (evolving)
+                    {
+                        avrgRoleConProbValues.Add(network.AverageRoleConProb);
+                        //SetValue(RoleConProperty, avrgRoleConProbValues);
+                        avrgRoleNeighborConProbValues.Add(network.AverageRoleNeighborConProb);
+                        //SetValue(RoleNeighborConProperty, avrgRoleNeighborConProbValues);
+                    }
                 });
             }
         }
 
-        /*private void getFromSim()
+        /*private void GetFromSim()
         {
             Action GetFromSim = () =>
             {
@@ -91,19 +198,15 @@ namespace Project
             paused = !paused;
         }
 
-        /*public SimWindow(int noNodes, int benefitChosen, int costChosen, double selectionIntensityChosen, double roleConProbChosen, double roleNeighborConProbChosen, double roleMethodCopyProbChosen, double percentCooperators) : this()
+        protected void OnPropertyChanged(PropertyChangedEventArgs e = null)
         {
-            ProsperityNetwork.Network network = new ProsperityNetwork.Network(noNodes, benefitChosen, costChosen, selectionIntensityChosen, roleConProbChosen, roleNeighborConProbChosen, roleMethodCopyProbChosen, percentCooperators);
-            /// Main loop: 
-            /// - Async loop
-            /// - Loop lasts until window is closed or stop is pressed
-            /// - Loop pauses when pause pressed (nested if in while using 'run' variable(?))
-            /// - Loop passes Variables to Graph controlers
-        }*/
+            PropertyChanged?.Invoke(this, e);
+        }
 
         void WindowClose(object sender, CancelEventArgs e)
         {
             network.StopLoop();
+            timer.Dispose();
         }
     }
 }

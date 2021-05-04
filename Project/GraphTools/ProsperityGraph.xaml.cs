@@ -25,29 +25,26 @@ namespace Project.GraphTools
     /// </summary>
     public partial class ProsperityGraph : BaseGraph
     {
-        public static readonly DependencyProperty LineProp = DependencyProperty.Register("LineValue", typeof(int), typeof(ProsperityGraph), new FrameworkPropertyMetadata(null));
-        List<double> prosperityReadings;
+        //public static readonly DependencyProperty LineProp = DependencyProperty.Register("LineValue", typeof(int), typeof(ProsperityGraph), new FrameworkPropertyMetadata(null));
+
         public int LineValue
         {
             get { return (int)GetValue(LineProp); }
             set
             {
                 SetValue(LineProp, value);
-                prosperityReadings.Add(value);
-                AddValues(0, prosperityReadings.ToArray());
             }
         }
 
         public ProsperityGraph() : base()
         {
-            prosperityReadings = new List<double>();
             InitializeComponent();
 
-            SeriesCollection.Add(new LineSeries
+            /*SeriesCollection.Add(new LineSeries
             {
                 Title = "Network Prosperity",
                 Values = new ChartValues<double> { }
-            });
+            });*/
         }
     }
 }

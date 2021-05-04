@@ -95,29 +95,31 @@ namespace Project.GraphTools
 
     public partial class CoopGraph : BaseGraph
     {
-        public static readonly DependencyProperty LineProp = DependencyProperty.Register("LineValue", typeof(int), typeof(CoopGraph), new FrameworkPropertyMetadata(null));
-        List<int> coopReadings;
-        public int LineValue
+        //public static readonly DependencyProperty LineProp = DependencyProperty.Register("LineValue", typeof(GearedValues<int>), typeof(CoopGraph), new FrameworkPropertyMetadata(null));
+
+        //List<int> coopReadings;
+        //int index;
+        /*public GearedValues<int> LineValue
         {
-            get { return (int)GetValue(LineProp); }
+            get { return (GearedValues<int>)GetValue(LineProp); }
             set 
             { 
                 SetValue(LineProp, value);
-                coopReadings.Add(value);
-                AddValues(0, coopReadings.Select(x => (double)x).ToArray());
+                OnPropertyChanged();
             }
-        }
+        }*/
 
         public CoopGraph() : base()
         {
-            coopReadings = new List<int>();
+            //coopReadings = new List<int>();
+            //index = 0;
             InitializeComponent();
 
-            SeriesCollection.Add(new LineSeries
+            /*SeriesCollection.Add(new LineSeries
             {
                 Title = "No. Cooperators",
                 Values = new ChartValues<double> { }
-            });
+            });*/
         }
 
 

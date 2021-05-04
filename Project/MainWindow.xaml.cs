@@ -32,9 +32,15 @@ namespace Project
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+
         private void NumberValidation(object sender, TextCompositionEventArgs e)
         {
             e.Handled = new Regex("[^0-9]").IsMatch(e.Text);
+        }
+
+        private void FileNameValidation(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !new Regex(@"^[\w\-. ]+$").IsMatch(e.Text);
         }
 
         // Add validation for each data entry that requires one i.e. validate simulation name to work in files, convert percentages to decimal, etc.
@@ -46,7 +52,7 @@ namespace Project
             TextBox textBox = grid.FindName(button.Tag.ToString()) as TextBox;
             try
             {
-                if(!(textBox.Tag.ToString() == "Percent" && int.Parse(textBox.Text) == 99))
+                if(!(textBox.Tag.ToString() == "Percent" && int.Parse(textBox.Text) == 100))
                 {
                     textBox.Text = (int.Parse(textBox.Text) + 1).ToString();
                 }
@@ -86,8 +92,8 @@ namespace Project
         {
             try
             {
-                Trace.WriteLine("Percentage Cooperators(int): " + int.Parse(percCooperators.Text));
-                Trace.WriteLine("Percentage Cooperators(double): " + ((double)int.Parse(percCooperators.Text) / 100));
+                //Trace.WriteLine("Percentage Cooperators(int): " + int.Parse(percCooperators.Text));
+                //Trace.WriteLine("Percentage Cooperators(double): " + ((double)int.Parse(percCooperators.Text) / 100));
                 SimWindow sim = new SimWindow(
                     simName.Text,
                     int.Parse(noNodes.Text),
@@ -101,7 +107,8 @@ namespace Project
                     int.Parse(updateDelay.Text),
                     qualityBox.SelectedValue.ToString(),
                     (bool)evolveCheck.IsChecked,
-                    (double)int.Parse(mutationExtreme.Text) / 100
+                    (double)int.Parse(mutationExtremeRMC.Text) / 100,
+                    (double)int.Parse(mutationExtremeRMNC.Text) / 100
                 );
                 sim.Show();
             }

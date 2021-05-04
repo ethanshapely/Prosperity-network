@@ -5,14 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Project"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="455" Width="825">
     <Grid>
         <Rectangle HorizontalAlignment="Left" Height="226" Margin="10,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="238"/>
         <Label Content="Probabilities (Percentage)" HorizontalAlignment="Left" Height="26" Margin="58,15,0,0" VerticalAlignment="Top" Width="146"/>
         <Label Content="Starting probability of a &#10;new node copying the &#10;role model's behaviour:" HorizontalAlignment="Left" Height="58" Margin="19,41,0,0" VerticalAlignment="Top" Width="136"/>
         <GroupBox Margin="164,47,0,0" HorizontalAlignment="Left" Width="80" Height="51" VerticalAlignment="Top" BorderThickness="0">
             <Grid>
-                <TextBox Text="50" Name="roleModelCopyProb" HorizontalAlignment="Left" Height="40" Margin="0,3,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="54" TextAlignment="Center" Tag="Percent"/>
+                <TextBox PreviewTextInput="NumberValidation" Text="50" Name="roleModelCopyProb" HorizontalAlignment="Left" Height="40" Margin="0,3,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="54" TextAlignment="Center" Tag="Percent"/>
                 <Button Content="/\" HorizontalAlignment="Left" Margin="54,3,0,0" VerticalAlignment="Top" Tag="roleModelCopyProb" Click="UpArrow"/>
                 <Button Content="\/" HorizontalAlignment="Left" Margin="54,23,0,0" VerticalAlignment="Top" Tag="roleModelCopyProb" Click="DownArrow"/>
             </Grid>
@@ -20,7 +20,7 @@
         <Label Content="Starting probability of a &#10;new node connecting &#10;to the role model:" HorizontalAlignment="Left" Margin="19,99,0,0" VerticalAlignment="Top" Width="136" Height="58"/>
         <GroupBox Margin="164,105,0,0" HorizontalAlignment="Left" Width="80" Height="50" VerticalAlignment="Top" BorderThickness="0">
             <Grid>
-                <TextBox Text="50" Name="roleModelConProb" HorizontalAlignment="Left" Height="40" Margin="0,3,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="54" TextAlignment="Center" Tag="Percent"/>
+                <TextBox PreviewTextInput="NumberValidation" Text="50" Name="roleModelConProb" HorizontalAlignment="Left" Height="40" Margin="0,3,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="54" TextAlignment="Center" Tag="Percent"/>
                 <Button Content="/\" HorizontalAlignment="Left" Margin="54,3,0,0" VerticalAlignment="Top" Tag="roleModelConProb" Click="UpArrow"/>
                 <Button Content="\/" HorizontalAlignment="Left" Margin="54,23,0,0" VerticalAlignment="Top" Tag="roleModelConProb" Click="DownArrow"/>
             </Grid>
@@ -28,7 +28,7 @@
         <Label Content="Starting probability of a &#xA;new node connecting &#xA;to the role model:" HorizontalAlignment="Left" Margin="19,157,0,0" VerticalAlignment="Top" Width="136" Height="58"/>
         <GroupBox Margin="164,165,0,0" Height="50" VerticalAlignment="Top" HorizontalAlignment="Left" Width="80" BorderThickness="0">
             <Grid>
-                <TextBox Text="50" Name="roleModelNeighborConProb" HorizontalAlignment="Left" Height="40" Margin="0,3,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="54" TextAlignment="Center" Tag="Percent"/>
+                <TextBox PreviewTextInput="NumberValidation" Text="50" Name="roleModelNeighborConProb" HorizontalAlignment="Left" Height="40" Margin="0,3,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="54" TextAlignment="Center" Tag="Percent"/>
                 <Button Content="/\" HorizontalAlignment="Left" Margin="54,3,0,0" VerticalAlignment="Top" Tag="roleModelNeighborConProb" Click="UpArrow"/>
                 <Button Content="\/" HorizontalAlignment="Left" Margin="54,23,0,0" VerticalAlignment="Top" Tag="roleModelNeighborConProb" Click="DownArrow"/>
             </Grid>
@@ -38,13 +38,13 @@
         <Label Content="Simulation Name:" HorizontalAlignment="Left" Height="29" Margin="324,58,0,0" VerticalAlignment="Top" Width="107"/>
         <GroupBox Margin="436,48,0,0" HorizontalAlignment="Left" Width="119" Height="50" VerticalAlignment="Top" BorderThickness="0">
             <Grid>
-                <TextBox x:Name="simName" HorizontalAlignment="Center" Height="40" Margin="0,3,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="88" TextAlignment="Center"/>
+                <TextBox PreviewTextInput="FileNameValidation"  x:Name="simName" HorizontalAlignment="Center" Height="40" Margin="0,3,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="88" TextAlignment="Center"/>
             </Grid>
         </GroupBox>
         <Label Content="No. Nodes:" HorizontalAlignment="Left" Height="29" Margin="278,122,0,0" VerticalAlignment="Top" Width="70"/>
         <GroupBox Margin="351,111,0,0" HorizontalAlignment="Left" Width="80" Height="50" VerticalAlignment="Top" BorderThickness="0">
             <Grid>
-                <TextBox Text="100" Name="noNodes" HorizontalAlignment="Left" Height="40" Margin="0,3,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="54" TextAlignment="Center" Tag="Int"/>
+                <TextBox PreviewTextInput="NumberValidation" Text="100" Name="noNodes" HorizontalAlignment="Left" Height="40" Margin="0,3,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="54" TextAlignment="Center" Tag="Int"/>
                 <Button Content="/\" HorizontalAlignment="Left" Margin="54,3,0,0" VerticalAlignment="Top" Tag="noNodes" Click="UpArrow"/>
                 <Button Content="\/" HorizontalAlignment="Left" Margin="54,23,0,0" VerticalAlignment="Top" Tag="noNodes"  Click="DownArrow"/>
             </Grid>
@@ -52,15 +52,15 @@
         <Label Content="Percentage of &#xA;Co-operators:" HorizontalAlignment="Left" Height="44" Margin="452,114,0,0" VerticalAlignment="Top" Width="86"/>
         <GroupBox Margin="540,111,0,0" HorizontalAlignment="Left" Width="80" Height="50" VerticalAlignment="Top" BorderThickness="0">
             <Grid>
-                <TextBox Text="50" Name="percCooperators" HorizontalAlignment="Left" Height="40" Margin="0,3,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="54" TextAlignment="Center" Tag="Percent"/>
+                <TextBox PreviewTextInput="NumberValidation" Text="50" Name="percCooperators" HorizontalAlignment="Left" Height="40" Margin="0,3,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="54" TextAlignment="Center" Tag="Percent"/>
                 <Button Content="/\" HorizontalAlignment="Left" Margin="54,3,0,0" VerticalAlignment="Top" Tag="percCooperators" Click="UpArrow"/>
                 <Button Content="\/" HorizontalAlignment="Left" Margin="54,23,0,0" VerticalAlignment="Top" Tag="percCooperators" Click="DownArrow"/>
             </Grid>
         </GroupBox>
-        <Label Content="Update data &#xA;  frequency:" HorizontalAlignment="Left" Height="46" Margin="276,167,0,0" VerticalAlignment="Top" Width="76"/>
+        <Label Content="Update data &#xA;frequency (/ms):" HorizontalAlignment="Left" Height="46" Margin="259,167,0,0" VerticalAlignment="Top" Width="97"/>
         <GroupBox Margin="351,166,0,0" HorizontalAlignment="Left" Width="80" Height="50" VerticalAlignment="Top" BorderThickness="0">
             <Grid>
-                <TextBox Text="5" Name="updateDelay" HorizontalAlignment="Left" Height="40" TextWrapping="Wrap" VerticalAlignment="Top" Width="54" TextAlignment="Center" Margin="0,3,0,0" Tag="Int"/>
+                <TextBox PreviewTextInput="NumberValidation" Text="5" Name="updateDelay" HorizontalAlignment="Left" Height="40" TextWrapping="Wrap" VerticalAlignment="Top" Width="54" TextAlignment="Center" Margin="0,3,0,0" Tag="Int"/>
                 <Button Content="/\" HorizontalAlignment="Left" Margin="54,3,0,0" VerticalAlignment="Top" Tag="updateDelay" Click="UpArrow"/>
                 <Button Content="\/" HorizontalAlignment="Left" Margin="54,23,0,0" VerticalAlignment="Top" Tag="updateDelay" Click="DownArrow"/>
             </Grid>
@@ -77,7 +77,7 @@
         <Label Content="Benefit:" HorizontalAlignment="Left" Height="28" Margin="652,55,0,0" VerticalAlignment="Top" Width="53"/>
         <GroupBox Margin="710,44,0,0" HorizontalAlignment="Left" Width="80" Height="50" VerticalAlignment="Top" BorderThickness="0">
             <Grid>
-                <TextBox Text="10" x:Name="benefit" HorizontalAlignment="Left" Height="40" TextWrapping="Wrap" VerticalAlignment="Top" Width="54" TextAlignment="Center" Margin="0,3,0,0" Tag="Int"/>
+                <TextBox PreviewTextInput="NumberValidation" Text="10" x:Name="benefit" HorizontalAlignment="Left" Height="40" TextWrapping="Wrap" VerticalAlignment="Top" Width="54" TextAlignment="Center" Margin="0,3,0,0" Tag="Int"/>
                 <Button Content="/\" HorizontalAlignment="Left" Margin="54,3,0,0" VerticalAlignment="Top" Tag="benefit" Click="UpArrow"/>
                 <Button Content="\/" HorizontalAlignment="Left" Margin="54,23,0,0" VerticalAlignment="Top" Tag="benefit" Click="DownArrow"/>
             </Grid>
@@ -85,7 +85,7 @@
         <Label Content="Cost:" HorizontalAlignment="Left" Height="28" Margin="656,108,0,0" VerticalAlignment="Top" Width="38"/>
         <GroupBox Margin="710,98,0,0" HorizontalAlignment="Left" Width="80" Height="50" VerticalAlignment="Top" BorderThickness="0">
             <Grid>
-                <TextBox Text="1" x:Name="cost" HorizontalAlignment="Left" Height="40" TextWrapping="Wrap" VerticalAlignment="Top" Width="54" TextAlignment="Center" Margin="0,3,0,0" Tag="Int"/>
+                <TextBox PreviewTextInput="NumberValidation" Text="1" x:Name="cost" HorizontalAlignment="Left" Height="40" TextWrapping="Wrap" VerticalAlignment="Top" Width="54" TextAlignment="Center" Margin="0,3,0,0" Tag="Int"/>
                 <Button Content="/\" HorizontalAlignment="Left" Margin="54,3,0,0" VerticalAlignment="Top" Tag="cost" Click="UpArrow"/>
                 <Button Content="\/" HorizontalAlignment="Left" Margin="54,23,0,0" VerticalAlignment="Top" Tag="cost" Click="DownArrow"/>
             </Grid>
@@ -93,21 +93,29 @@
         <Label Content="Selection &#xA;Intensity:" HorizontalAlignment="Left" Height="42" Margin="646,157,0,0" VerticalAlignment="Top" Width="59"/>
         <GroupBox Margin="710,153,0,0" HorizontalAlignment="Left" Width="80" Height="50" VerticalAlignment="Top" BorderThickness="0">
             <Grid>
-                <TextBox Text="2" x:Name="selectionIntensity" HorizontalAlignment="Left" Height="40" TextWrapping="Wrap" VerticalAlignment="Top" Width="54" TextAlignment="Center" Margin="0,3,0,0" Tag="Percent"/>
+                <TextBox PreviewTextInput="NumberValidation" Text="2" x:Name="selectionIntensity" HorizontalAlignment="Left" Height="40" TextWrapping="Wrap" VerticalAlignment="Top" Width="54" TextAlignment="Center" Margin="0,3,0,0" Tag="Int"/>
                 <Button Content="/\" HorizontalAlignment="Left" Margin="54,3,0,0" VerticalAlignment="Top" Tag="selectionIntensity" Click="UpArrow"/>
                 <Button Content="\/" HorizontalAlignment="Left" Margin="54,23,0,0" VerticalAlignment="Top" Tag="selectionIntensity" Click="DownArrow"/>
             </Grid>
         </GroupBox>
-        <Rectangle HorizontalAlignment="Left" Height="147" Margin="10,241,0,0" Stroke="Black" VerticalAlignment="Top" Width="238"/>
-        <CheckBox x:Name="evolveCheck" Content="Create an Evolving Network?" HorizontalAlignment="Left" Margin="43,255,0,0" VerticalAlignment="Top"/>
-        <Label Content="Mutation Extreme &#xA;(less than 100)" HorizontalAlignment="Left" Height="56" Margin="19,296,0,0" VerticalAlignment="Top" Width="110"/>
-        <GroupBox Margin="149,299,0,0" HorizontalAlignment="Left" Width="80" Height="50" VerticalAlignment="Top" BorderThickness="0">
+        <Rectangle HorizontalAlignment="Left" Height="183" Margin="10,241,0,0" Stroke="Black" VerticalAlignment="Top" Width="238"/>
+        <CheckBox x:Name="evolveCheck" Content="Create an Evolving Network?" HorizontalAlignment="Left" Margin="43,250,0,0" VerticalAlignment="Top"/>
+        <Label Content="Mutation Extreme for&#xA;connecting to the&#xA;role mode (%):" HorizontalAlignment="Left" Height="62" Margin="27,275,0,0" VerticalAlignment="Top" Width="125"/>
+        <GroupBox Margin="152,281,0,0" HorizontalAlignment="Left" Width="80" Height="50" VerticalAlignment="Top" BorderThickness="0">
             <Grid>
-                <TextBox Text="50" x:Name="mutationExtreme" HorizontalAlignment="Left" Height="40" TextWrapping="Wrap" VerticalAlignment="Top" Width="54" TextAlignment="Center" Margin="0,3,0,0" Tag="Percent"/>
-                <Button Content="/\" HorizontalAlignment="Left" Margin="54,3,0,0" VerticalAlignment="Top" Tag="mutationExtreme" Click="UpArrow"/>
-                <Button Content="\/" HorizontalAlignment="Left" Margin="54,23,0,0" VerticalAlignment="Top" Tag="mutationExtreme" Click="DownArrow"/>
+                <TextBox PreviewTextInput="NumberValidation" Text="50" x:Name="mutationExtremeRMC" HorizontalAlignment="Left" Height="40" TextWrapping="Wrap" VerticalAlignment="Top" Width="54" TextAlignment="Center" Margin="0,3,0,0" Tag="Percent"/>
+                <Button Content="/\" HorizontalAlignment="Left" Margin="54,3,0,0" VerticalAlignment="Top" Tag="mutationExtremeRMC" Click="UpArrow"/>
+                <Button Content="\/" HorizontalAlignment="Left" Margin="54,23,0,0" VerticalAlignment="Top" Tag="mutationExtremeRMC" Click="DownArrow"/>
             </Grid>
         </GroupBox>
         <Button Content="Generate" HorizontalAlignment="Center" Height="33" Margin="0,355,0,0" VerticalAlignment="Top" Width="198" Click="GenerateSim"/>
+        <Label Content="Mutation Extreme for&#xA;connecting to the&#xA;role model (%):" HorizontalAlignment="Left" Height="60" Margin="27,337,0,0" VerticalAlignment="Top" Width="125"/>
+        <GroupBox Margin="152,342,0,0" HorizontalAlignment="Left" Width="80" Height="50" VerticalAlignment="Top" BorderThickness="0">
+            <Grid>
+                <TextBox PreviewTextInput="NumberValidation" Text="50" x:Name="mutationExtremeRMNC" HorizontalAlignment="Left" Height="40" TextWrapping="Wrap" VerticalAlignment="Top" Width="54" TextAlignment="Center" Margin="0,3,0,0" Tag="Percent"/>
+                <Button Content="/\" HorizontalAlignment="Left" Margin="54,3,0,0" VerticalAlignment="Top" Tag="mutationExtremeRMNC" Click="UpArrow"/>
+                <Button Content="\/" HorizontalAlignment="Left" Margin="54,23,0,0" VerticalAlignment="Top" Tag="mutationExtremeRMNC" Click="DownArrow"/>
+            </Grid>
+        </GroupBox>
     </Grid>
 </Window>

@@ -66,16 +66,16 @@ namespace ProsperityNetwork
         {
             int totalPayoffcalc = 0;
             int rmIndex = 0;
-            if(nodeList[0] == null)
+            /*if(nodeList[0] == null)
             {
                 Trace.WriteLine("Start Node is null");
-            }
+            }*/
             foreach (Node node in nodeList)
             {
-                if(node == null)
+                /*if(node == null)
                 {
                     Trace.WriteLine("Node read as null");
-                }
+                }*/
                 totalPayoffcalc += CalcNodePayoff(node);
                 if (nodeList[rmIndex].GetEffectivePayoff() < node.GetEffectivePayoff())
                 {

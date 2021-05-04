@@ -6,10 +6,10 @@
         xmlns:graph="clr-namespace:Project.GraphTools"
         mc:Ignorable="d"
         Closing="WindowClose"
-        Title="SimWindow" Height="450" Width="800">
+        Title="SimWindow" Height="523" Width="951">
     <Grid>
-        <graph:CoopGraph LineValue="{Binding NetworkNoCoops, Mode=OneWay}" HorizontalAlignment="Left" Height="250" Margin="10,10,0,0" VerticalAlignment="Top" Width="380"/>
-        <graph:ProsperityGraph LineValue="{Binding NetworkProsperity, Mode=OneWay}" HorizontalAlignment="Left" Height="250" Margin="400,173,0,0" VerticalAlignment="Top" Width="380"/>
+        <graph:CoopGraph LineValues="{Binding CoopTotals, Mode=OneWay}" GraphQuality="{Binding LineQuality, Mode=OneWay}" HorizontalAlignment="Left" Height="250" Margin="10,10,0,0" VerticalAlignment="Top" Width="380"/>
+        <graph:ProsperityGraph LineValues="{Binding Prosperity, Mode=OneWay}" GraphQuality="{Binding LineQuality, Mode=OneWay}" HorizontalAlignment="Left" Height="250" Margin="400,173,0,0" VerticalAlignment="Top" Width="380"/>
         <Button Content="Pause" HorizontalAlignment="Left" Margin="44,284,0,0" VerticalAlignment="Top" Height="28" Width="132" Click="PauseButton"/>
     </Grid>
 </Window>

@@ -5,11 +5,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
-             xmlns:BaseGraph="clr-namespace:Project.GraphTools"
+             xmlns:geared="clr-namespace:LiveCharts.Geared;assembly=LiveCharts.Geared"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <lvc:CartesianChart Series="{Binding SeriesCollection}" LegendLocation="Right" >
+        <lvc:CartesianChart LegendLocation="Right" >
+            <lvc:CartesianChart.Series>
+                <geared:GLineSeries Values="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:CoopGraph}}, Path=LineValues}" />
+            </lvc:CartesianChart.Series>
             <lvc:CartesianChart.AxisY>
                 <lvc:Axis Title="No. Cooperators" LabelFormatter="{Binding YFormatter}"/>
             </lvc:CartesianChart.AxisY>

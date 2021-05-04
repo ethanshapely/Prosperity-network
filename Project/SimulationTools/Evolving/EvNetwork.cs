@@ -8,9 +8,9 @@ namespace ProsperityNetwork.Evolving
     class EvNetwork : BaseNetwork
     {
         //private new EvNode[] nodeList;
-        private double mutationExtreme;
+        private double mutationExtremeRMC, mutationExtremeRMNC;
 
-        public EvNetwork(int noNodes, int benefitChosen, int costChosen, double selectionIntensityChosen, double startRoleConProbChosen, double startRoleNeighborConProbChosen, double roleMethodCopyProbChosen, double percentCooperators, double mutationExtremeChosen)
+        public EvNetwork(int noNodes, int benefitChosen, int costChosen, double selectionIntensityChosen, double startRoleConProbChosen, double startRoleNeighborConProbChosen, double roleMethodCopyProbChosen, double percentCooperators, double mutationExtremeRMCChosen, double mutationExtremeRMNCChosen)
             : base(noNodes, benefitChosen, costChosen, selectionIntensityChosen, startRoleConProbChosen, startRoleNeighborConProbChosen, roleMethodCopyProbChosen, percentCooperators)
         {
             nodeList = new EvNode[noNodes];
@@ -23,7 +23,8 @@ namespace ProsperityNetwork.Evolving
             roleModelIndex = -1;
             totalPayoff = 0;
             maxPayoff = (noNodes * (noNodes - 1) * (benefit - cost));
-            mutationExtreme = mutationExtremeChosen;
+            mutationExtremeRMC = mutationExtremeRMCChosen;
+            mutationExtremeRMNC = mutationExtremeRMNCChosen;
 
             //Populate the Network
             totalCooperators = (int)(percentCooperators * noNodes);
@@ -70,7 +71,7 @@ namespace ProsperityNetwork.Evolving
             return node is EvCooperator;
         }
 
-        private double ProbChange(double prob)
+        private double ProbChange(double prob, double mutationExtreme)
         {
             double returnProb;
             Random rng = new Random();
@@ -116,13 +117,11 @@ namespace ProsperityNetwork.Evolving
             int roleCopyNum = rng.Next(0, 101);
             int roleConNum = rng.Next(0, 101);
             int roleNeighborConNum;
-            double newRoleConProb = roleModel.RoleConProb;
-            double newRoleNeighborConProb = roleModel.RoleNeighborConProb;
-            bool roleNeighborCon = false;
+            double newRoleConProb = ProbChange(roleModel.RoleConProb, mutationExtremeRMC);
+            double newRoleNeighborConProb = ProbChange(roleModel.RoleNeighborConProb, mutationExtremeRMNC);
             if (roleConNum <= (roleModel.RoleConProb * 100))
             {
                 newNodeCons.Add(roleModelIndex);
-                newRoleConProb = ProbChange(newRoleConProb);
             }
             for (int i = 0; i < roleModel.NeighborIndexes.Count; i++)
             {
@@ -130,12 +129,7 @@ namespace ProsperityNetwork.Evolving
                 if (roleNeighborConNum <= (roleModel.RoleNeighborConProb * 100))
                 {
                     newNodeCons.Add(roleModel.NeighborIndexes[i]);
-                    roleNeighborCon = true;
                 }
-            }
-            if (roleNeighborCon)
-            {
-                newRoleNeighborConProb = ProbChange(newRoleNeighborConProb);
             }
             if (IsCooperator(roleModel))
             {

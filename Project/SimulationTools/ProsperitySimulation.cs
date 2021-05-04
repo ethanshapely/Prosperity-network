@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.IO;
 using System.Diagnostics;
-using System.Xml;
+//using System.Xml;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
@@ -13,38 +13,46 @@ namespace ProsperityNetwork
 {
     class ProsperitySimulation
     {
-        int delay, totalCoop;
-        double prosperity, avrgRoleConProb, avrgRoleNeighborConProb;
+        private int delay, totalCoop, loopNum;
+        private double prosperity, avrgRoleConProb, avrgRoleNeighborConProb, avrgCoopTotal;
 
-        BaseNetwork network; ///Get values from UI passed in. For now they will be entered manually for debugging
-        bool loop, run, isEvolving;
+        private BaseNetwork network;
+        private bool loop, run;
+        private readonly  bool isEvolving;
+
         public int TotalCooperators
         {
             get { return totalCoop; }
         }
-        /*
-         * get
-         * {
-         *      Dispatcher.Invoke({
-         *          get simloop prosperity
-         *      })
-         * }
-         */
+        
         public double Prosperity
         {
             get { return prosperity; }
         }
 
-        public ProsperitySimulation(int noNodes, int benefitChosen, int costChosen, double selectionIntensityChosen, double roleConProbChosen, double roleNeighborConProbChosen, double roleMethodCopyProbChosen, double percentCooperators, int delay, bool evolveCheck, double mutationExtreme)
+        public double AverageCooperators
         {
-            //Trace.WriteLine("No. Nodes: " + noNodes);
-            //Trace.WriteLine("Percentage Cooperators(start): " + percentCooperators);
+            get { return avrgCoopTotal; }
+        }
+
+        public double AverageRoleConProb
+        {
+            get { return avrgRoleConProb; }
+        }
+
+        public double AverageRoleNeighborConProb
+        {
+            get { return avrgRoleNeighborConProb; }
+        }
+
+        public ProsperitySimulation(int noNodes, int benefitChosen, int costChosen, double selectionIntensityChosen, double roleConProbChosen, double roleNeighborConProbChosen, double roleMethodCopyProbChosen, double percentCooperators, int delay, bool evolveCheck, double mutationExtremeRMC, double mutationExtremeRMNC)
+        {
             loop = true;
             run = true;
             isEvolving = evolveCheck;
             if (isEvolving)
             {
-                network = new EvNetwork(noNodes, benefitChosen, costChosen, selectionIntensityChosen, roleConProbChosen, roleNeighborConProbChosen, roleMethodCopyProbChosen, percentCooperators, mutationExtreme);
+                network = new EvNetwork(noNodes, benefitChosen, costChosen, selectionIntensityChosen, roleConProbChosen, roleNeighborConProbChosen, roleMethodCopyProbChosen, percentCooperators, mutationExtremeRMC, mutationExtremeRMNC);
             }
             else
             {
@@ -53,22 +61,26 @@ namespace ProsperityNetwork
             this.delay = delay;
             totalCoop = network.TotalCooperators;
             prosperity = network.GetProsperity();
+            loopNum = 0;
+            avrgCoopTotal = 0;
         }
 
-        /*public void WriteTXTFile(StreamWriter writer, string path, string[] data)
+        public void WriteNewTXTEntry(StreamWriter writer)
         {
-            foreach (string line in data)
+            if (isEvolving)
             {
-                writer.WriteLine(line);
+                writer.WriteLine(loopNum + ", " + prosperity + ", " + totalCoop + ", " + avrgCoopTotal + ", " + avrgRoleConProb + ", " + avrgRoleNeighborConProb);
             }
-        }*/
+            else
+            {
+                writer.WriteLine(loopNum + ", " + prosperity + ", " + totalCoop + ", " + avrgCoopTotal);
+            }
+        }
 
-        /*public void WriteNewTXTEntry(StreamWriter writer)
-        {
-            //
-        }*/
+        //No longer implemented due to an error with XML file formatting while using the XMLTextWriter to write the header,
+        //in other cases the file would write but in an invalid format
 
-        public void WriteNewXMLEntry(XmlTextWriter writer, string loopNum)
+        /*public void WriteNewXMLEntry(XmlTextWriter writer, string loopNum)
         {
             writer.WriteStartElement("Log", "");
             writer.WriteStartElement("Log_num", "");
@@ -95,10 +107,10 @@ namespace ProsperityNetwork
 
             writer.WriteEndElement();
             writer.WriteEndElement();
-        }
+        }*/
 
         /*
-        Example of XML file:
+        Example of XML file structure:
         <log>
             <Log_num>
                 1
@@ -162,7 +174,7 @@ namespace ProsperityNetwork
             }
         }
 
-        public void AsyncLoopStart(string simName)
+        /*public void AsyncLoopStart(string simName)
         {
             Action SimLoop = () =>
             {
@@ -171,8 +183,8 @@ namespace ProsperityNetwork
                 path = Path.Combine(path, @"TXT\");
                 string extension = ".txt";
 
-                /*path = Path.Combine(path, @"XML\");
-                string extension = ".xml";*/
+                ///path = Path.Combine(path, @"XML\");
+                ///string extension = ".xml";
 
                 if (File.Exists(Path.Combine(path, simName + extension)))
                 {
@@ -238,11 +250,87 @@ namespace ProsperityNetwork
                         network.AddNewNode(network.RemoveNode());
                     }
                 }
-                /*writer.WriteEndElement();
-                writer.WriteEndDocument();
-                writer.Close();*/
+                ///writer.WriteEndElement();
+                ///writer.WriteEndDocument();
+                ///writer.Close();
+                writer.Close();
             };
             Task.Factory.StartNew(SimLoop);
+        }*/
+
+        public Action AsyncLoopStart(string simName)
+        {
+            return () =>
+            {
+                string path = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), @"..\..\..\"));
+
+                path = Path.Combine(path, @"TXT\");
+                string extension = ".txt";
+
+                ///path = Path.Combine(path, @"XML\");
+                ///string extension = ".xml";
+
+                if (File.Exists(Path.Combine(path, simName + extension)))
+                {
+                    path = FileExistsCheck(path, simName, extension, 1);
+                }
+                else
+                {
+                    path = Path.Combine(path, simName + extension);
+                }
+                Trace.WriteLine("Path:" + path);
+                StreamWriter writer = new StreamWriter(path);
+                if (isEvolving)
+                {
+                    writer.WriteLine("Loop number | Prosperity | Total Cooperators | Average No. Cooperators | Average RoleConProb | Average RoleNeighborConProb");
+                }
+                else
+                {
+                    writer.WriteLine("Loop number | Prosperity | Total Cooperators | Average No. Cooperators");
+                }
+                //XmlTextWriter writer = new XmlTextWriter(path, System.Text.Encoding.UTF8);
+                //writer.WriteStartDocument(true);
+                //writer.WriteStartElement("Sim", "");
+                while (loop)
+                {
+                    //Indefinite loop to run the network
+                    Thread.Sleep(1);
+                    if (run)
+                    {
+                        loopNum += 1;
+                        network.CalcTotalPayoff();
+                        avrgCoopTotal = (network.TotalCooperators + (avrgCoopTotal * (loopNum - 1))) / loopNum;
+                        if (loopNum % delay == 0)
+                        {
+                            prosperity = network.GetProsperity();
+                            totalCoop = network.TotalCooperators;
+                            //Console.WriteLine(loopNum);
+                            Trace.WriteLine("Loop number: " + loopNum);
+                            //Console.WriteLine(prosperity);
+                            Trace.WriteLine("Prosperity: " + prosperity);
+                            //Console.WriteLine(totalCoop);
+                            Trace.WriteLine("TotalCoops: " + totalCoop);
+                            //Console.WriteLine(avrgCoopTotal);
+                            Trace.WriteLine("AvrgCoops: " + avrgCoopTotal);
+                            if (isEvolving)
+                            {
+                                avrgRoleConProb = ((EvNetwork)network).CalcAvrgRoleConProb();
+                                Trace.WriteLine("Average RoleConProb: " + avrgRoleConProb);
+                                avrgRoleNeighborConProb = ((EvNetwork)network).CalcAvrgRoleNeighborConProb();
+                                Trace.WriteLine("Average RoleNeighborConProb: " + avrgRoleNeighborConProb);
+                                //writer.WriteLine(loopNum + ", " + prosperity + ", " + totalCoop + ", " + avrgCoopTotal + ", " + avrgRoleConProb + ", " + avrgRoleNeighborConProb);
+                            }
+                            WriteNewTXTEntry(writer);
+                            //WriteNewXMLEntry(writer, loopNum.ToString(), prosperity, totalCoop);
+                        }
+                        network.AddNewNode(network.RemoveNode());
+                    }
+                }
+                //writer.WriteEndElement();
+                //writer.WriteEndDocument();
+                //writer.Close();
+                writer.Close();
+            };
         }
     }
 }
