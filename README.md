@@ -7,7 +7,7 @@ Required libraries outside of the CS.NET framework:
 - Livecharts.Geared
 
 # Simulation Tools Notes:
-A collection of C# class files designed and first created to model the proposed 
+A collection of C# class files designed and first created to model the proposed network model
 
 'ProsperityNetwork' Namespace:
 
