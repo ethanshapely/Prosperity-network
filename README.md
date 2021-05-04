@@ -6,6 +6,10 @@ Required libraries outside of the CS.NET framework:
 - Livecharts
 - Livecharts.Geared
 
+When running this application from cloning this repository:
+Load the 'Project' folder as a WPF application project in Visual Studio and build a 
+release build to run/test (you will also have the option to load a debug build as well)
+
 # Simulation Tools Notes:
 A collection of C# class files designed and first created to imitate the proposed network model
 
