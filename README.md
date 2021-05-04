@@ -56,4 +56,5 @@ A = 1x5
 {Loop number}  {Prosperity}  {Total Cooperators} {Average Number of Cooperators up to that point}  {Average probability of connecting to the role model}   {Average probability of connecting to a neighbor of the role model}
 %}
 plot(cell2mat(A(1,1)), cell2mat(A(1,2)));
+
 -------------------------------------
