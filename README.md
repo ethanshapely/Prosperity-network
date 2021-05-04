@@ -9,6 +9,8 @@ Required libraries outside of the CS.NET framework:
 # Simulation Tools Notes:
 A collection of C# class files designed and first created to imitate the proposed network model
 
+-------------------------------------
+
 'ProsperityNetwork' Namespace:
 
 - 'BaseNetwork' - A base class used to model a network of nodes 
@@ -35,7 +37,9 @@ A collection of C# class files designed and first created to imitate the propose
 	'EvNode' inheriting from 'Node' but with the addition of tracking independent connection
 	probabilities for if they are the role model of the 'EvNetwork'
 
-#Example MatLab code
+-------------------------------------
+
+# Example MatLab code
 Example code for how Matlab could be used to parse data produced from a network instance
 
 -------------------------------------
