@@ -34,3 +34,26 @@ A collection of C# class files designed and first created to imitate the propose
 	similar to the classes found in the earlier ProsperityNetwork namespace but with
 	'EvNode' inheriting from 'Node' but with the addition of tracking independent connection
 	probabilities for if they are the role model of the 'EvNetwork'
+
+#Example MatLab code
+Example code for how Matlab could be used to parse data produced from a network instance
+
+-------------------------------------
+%Evolving Network: 
+
+% Replace file name with data file produced
+fileID = fopen('EvTest.txt','r');
+
+%Change dataFormat to: '%d, %f, %d, %f' if parsing data 
+% from a non-evolving networks recorded data
+dataFormat = '%d, %f, %d, %f, %f, %f';
+
+A = textscan(fileID, dataFormat,'HeaderLines', 1,'Delimiter',' | ');
+fclose(fileID);
+%{
+Cell array layout:
+A = 1x5
+{Loop number}  {Prosperity}  {Total Cooperators} {Average Number of Cooperators up to that point}  {Average probability of connecting to the role model}   {Average probability of connecting to a neighbor of the role model}
+%}
+plot(cell2mat(A(1,1)), cell2mat(A(1,2)));
+-------------------------------------
